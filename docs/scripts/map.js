@@ -91,7 +91,7 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
 
     var layers = document.getElementById('menu');
     layers.appendChild(link);
-}
+};
 
 // Add custom popup html to each marker
 layer.on('layeradd', function(e) {
