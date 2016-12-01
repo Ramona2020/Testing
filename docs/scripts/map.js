@@ -1,13 +1,97 @@
 // code adapted from https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-with-image-slideshow/
 
 // ACTION ITEM: replace mapbox access token below with your own mapbox access token. Refer to blank for information on accessing your token.
-L.mapbox.accessToken =
-	'pk.eyJ1IjoicmFtb25hMjAyMCIsImEiOiI2ZjQzZTA4N2QxNjA5NzM2YjVhZTMwY2M1YmI2M2I2YSJ9.U1IwzOSQO-xjLU7NPxo-Dw';
+//L.mapbox.accessToken =
+//	'pk.eyJ1IjoicmFtb25hMjAyMCIsImEiOiI2ZjQzZTA4N2QxNjA5NzM2YjVhZTMwY2M1YmI2M2I2YSJ9.U1IwzOSQO-xjLU7NPxo-Dw';
 
 // ACTION ITEM: Insert the Mapbox key for your landing page map, refer blank for information on locating the map key. Also change the set view for your region of the world
-var map = L.mapbox.map('map', "ramona2020.o3fkmamf").setView([42.36, -71.06],
+//var map = L.mapbox.map('map', "ramona2020.o3fkmamf").setView([42.36, -71.06],
 	12);
-var layer = L.mapbox.featureLayer().addTo(map)
+//var layer = L.mapbox.featureLayer().addTo(map)
+mapboxgl.accessToken = 'pk.eyJ1IjoicmFtb25hMjAyMCIsImEiOiI2ZjQzZTA4N2QxNjA5NzM2YjVhZTMwY2M1YmI2M2I2YSJ9.U1IwzOSQO-xjLU7NPxo-Dw';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/ramona2020/civ45jd8x000b2jobbs53k0ua',
+    zoom: 12,
+    center: [-71.06, 42.36]
+});
+
+map.on('load', function () {
+ map.addSource('somerville', {
+      type: 'raster',
+        url: 'mapbox://ramona2020.4tm1idpm'
+    });
+ map.addLayer({
+    'id': 'somerville',
+    'type': 'raster',
+    'source': 'somerville',
+    'layout': {
+         'visibility': 'visible'
+        }
+        });
+    map.addSource('boston', {
+         type: 'raster',
+         //use the map id of the tileset appended to mapbox://
+           url: 'mapbox://ramona2020.66n3zq9m'
+       });
+    map.addLayer({
+       'id': 'boston',
+       'type': 'raster',
+       'source': 'boston',
+       'layout': {
+            'visibility': 'visible'
+           }
+             });
+    map.addSource('contours', {
+        type: 'vector',
+        url: 'mapbox://mapbox.mapbox-terrain-v2'
+    });
+    map.addLayer({
+        'id': 'contours',
+        'type': 'line',
+        'source': 'contours',
+        'source-layer': 'contour',
+        'layout': {
+            'visibility': 'visible',
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#877b59',
+            'line-width': 1
+        }
+    });
+});
+
+var toggleableLayerIds = [ 'contours', 'somerville', 'boston' ];
+
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+    var id = toggleableLayerIds[i];
+
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = id;
+
+    link.onclick = function (e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
+
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+}
 
 // Add custom popup html to each marker
 layer.on('layeradd', function(e) {
