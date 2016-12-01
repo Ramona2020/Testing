@@ -6,7 +6,7 @@ body { margin-top: 50px; }
 /* Map Div */
 
 #map {
-  position:relative;
+  position:absolute;
   height:93%;
   width:100%;
 }
