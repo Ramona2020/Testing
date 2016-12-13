@@ -330,8 +330,8 @@ function processLayer(result) {
   // Add features to the map
   // TODO: Add functionality for switching between basemaps
   var selection_label = $('#layers-dropdown option:selected').text();
-  if (layers[selection_label] != "undefined") {
-    new_id = layers[selection_label]
+  if (layers[selection_label] == "Somerville") {
+    new_id = 'mapbox://ramona2020.4tm1idpm'
   } else new_id = 'mapbox://styles/ramona2020/civ45jd8x000b2jobbs53k0ua';
   map.getSource('points').setData(result);
 }
