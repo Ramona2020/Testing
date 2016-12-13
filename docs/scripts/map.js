@@ -326,6 +326,32 @@ function getPoints(cloudantIDs) {
   });
 }
 
+function processLayer(result) {
+  // Add features to the map
+  // TODO: Add functionality for switching between basemaps
+  var selection_label = $('#layers-dropdown option:selected').text();
+  if (layers[selection_label] != "undefined") {
+    new_id = layers[selection_label]
+  } else new_id = 'mapbox://styles/ramona2020/civ45jd8x000b2jobbs53k0ua';
+  map.getSource('points').setData(result);
+}
+
+// Show and hide the alert box
+function showAlert(alert_id) {
+  $("#" + alert_id).css({
+    "display": "block"
+  }).addClass("in");
+  window.setTimeout(function() {
+    hideAlert(alert_id);
+  }, 4000);
+}
+
+function hideAlert(alert_id) {
+  $("#" + alert_id).removeClass("in").css({
+    "display": "none"
+  });
+}
+
 // Add custom popup html to each marker
 //layer.on('layeradd', function(e) {
 //	var marker = e.layer;
