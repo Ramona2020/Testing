@@ -16,82 +16,82 @@ var map = new mapboxgl.Map({
     center: [-71.06, 42.36]
 });
 
-//map.on('load', function () {
-// map.addSource('somerville', {
-//      type: 'raster',
-//        url: 'mapbox://ramona2020.4tm1idpm'
- //   });
-// map.addLayer({
-//    'id': 'somerville',
-//    'type': 'raster',
-//    'source': 'somerville',
-//    'layout': {
- //        'visibility': 'visible'
- //       }
- //       });
-  //  map.addSource('boston', {
-   //      type: 'raster',
+map.on('load', function () {
+map.addSource('somerville', {
+      type: 'raster',
+        url: 'mapbox://ramona2020.4tm1idpm'
+    });
+ map.addLayer({
+    'id': 'somerville',
+    'type': 'raster',
+    'source': 'somerville',
+    'layout': {
+         'visibility': 'visible'
+        }
+        });
+    map.addSource('boston', {
+         type: 'raster',
          //use the map id of the tileset appended to mapbox://
-   //        url: 'mapbox://ramona2020.66n3zq9m'
-  //     });
-   // map.addLayer({
-   //    'id': 'boston',
-    //   'type': 'raster',
-     //  'source': 'boston',
-    //   'layout': {
-     //       'visibility': 'visible'
-     //      }
-     //        });
-  //  map.addSource('contours', {
-    //    type: 'vector',
-  //      url: 'mapbox://mapbox.mapbox-terrain-v2'
-  //  });
-  //  map.addLayer({
-  //      'id': 'contours',
- //       'type': 'line',
-  //      'source': 'contours',
-   //     'source-layer': 'contour',
-    //    'layout': {
-     //       'visibility': 'visible',
-    //        'line-join': 'round',
-     //       'line-cap': 'round'
-     //   },
-     //   'paint': {
-      //      'line-color': '#877b59',
-     //       'line-width': 1
-   //     }
- //   });
-//});
+           url: 'mapbox://ramona2020.66n3zq9m'
+       });
+    map.addLayer({
+       'id': 'boston',
+       'type': 'raster',
+       'source': 'boston',
+       'layout': {
+            'visibility': 'visible'
+           }
+             });
+    map.addSource('contours', {
+        type: 'vector',
+        url: 'mapbox://mapbox.mapbox-terrain-v2'
+    });
+    map.addLayer({
+        'id': 'contours',
+        'type': 'line',
+        'source': 'contours',
+        'source-layer': 'contour',
+        'layout': {
+            'visibility': 'visible',
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#877b59',
+            'line-width': 1
+        }
+    });
+});
 
-//var toggleableLayerIds = [ 'contours', 'somerville', 'boston' ];
+var toggleableLayerIds = [ 'contours', 'somerville', 'boston' ];
 
-//for (var i = 0; i < toggleableLayerIds.length; i++) {
- //   var id = toggleableLayerIds[i];
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+    var id = toggleableLayerIds[i];
 
- //   var link = document.createElement('a');
- //   link.href = '#';
- //   link.className = 'active';
- //   link.textContent = id;
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = id;
 
-  //  link.onclick = function (e) {
-  //      var clickedLayer = this.textContent;
-   //     e.preventDefault();
-   //     e.stopPropagation();
+    link.onclick = function (e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
 
-   //     var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+       var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
 
-  //      if (visibility === 'visible') {
-  //          map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-  //          this.className = '';
-   //     } else {
-    //        this.className = 'active';
-     //       map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-    //    }
- //   };
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
 
- //   var layers = document.getElementById('menu');
- //   layers.appendChild(link);
-//};
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+};
 
 map.on('style.load', function() {
   map.addSource("points", {
