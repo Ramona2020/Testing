@@ -29,13 +29,13 @@ map.addSource('somerville', {
          'visibility': 'visible'
         }
         });
-    map.addSource('boston', {
+    map.addSource('boston1', {
          type: 'raster',
          //use the map id of the tileset appended to mapbox://
            url: 'mapbox://ramona2020.66n3zq9m'
        });
     map.addLayer({
-       'id': 'boston',
+       'id': 'boston1',
        'type': 'raster',
        'source': 'boston',
        'layout': {
@@ -63,7 +63,7 @@ map.addSource('somerville', {
     });
 });
 
-var toggleableLayerIds = [ 'contours', 'somerville', 'boston' ];
+var toggleableLayerIds = [ 'contours', 'somerville', 'boston1' ];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
@@ -326,31 +326,31 @@ function getPoints(cloudantIDs) {
   });
 }
 
-function processLayer(result) {
+//function processLayer(result) {
   // Add features to the map
   // TODO: Add functionality for switching between basemaps
-  var selection_label = $('#layers-dropdown option:selected').text();
-  if (layers[selection_label] == "Somerville") {
-    new_id = 'mapbox://ramona2020.4tm1idpm'
-  } else new_id = 'mapbox://styles/ramona2020/civ45jd8x000b2jobbs53k0ua';
-  map.getSource('points').setData(result);
-}
+//  var selection_label = $('#layers-dropdown option:selected').text();
+//  if (layers[selection_label] == "Somerville") {
+ //   new_id = 'mapbox://ramona2020.4tm1idpm'
+ // } else new_id = 'mapbox://styles/ramona2020/civ45jd8x000b2jobbs53k0ua';
+ // map.getSource('points').setData(result);
+//}
 
 // Show and hide the alert box
-function showAlert(alert_id) {
-  $("#" + alert_id).css({
-    "display": "block"
-  }).addClass("in");
-  window.setTimeout(function() {
-    hideAlert(alert_id);
-  }, 4000);
-}
+//function showAlert(alert_id) {
+//  $("#" + alert_id).css({
+//    "display": "block"
+//  }).addClass("in");
+//  window.setTimeout(function() {
+ //   hideAlert(alert_id);
+//  }, 4000);
+//}
 
-function hideAlert(alert_id) {
-  $("#" + alert_id).removeClass("in").css({
-    "display": "none"
-  });
-}
+//function hideAlert(alert_id) {
+//  $("#" + alert_id).removeClass("in").css({
+ //   "display": "none"
+//  });
+//}
 
 // Add custom popup html to each marker
 //layer.on('layeradd', function(e) {
