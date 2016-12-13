@@ -29,13 +29,13 @@ map.addSource('somerville', {
          'visibility': 'visible'
         }
         });
-    map.addSource('boston1', {
+    map.addSource('boston', {
          type: 'raster',
          //use the map id of the tileset appended to mapbox://
            url: 'mapbox://ramona2020.66n3zq9m'
        });
     map.addLayer({
-       'id': 'boston1',
+       'id': 'boston',
        'type': 'raster',
        'source': 'boston',
        'layout': {
@@ -63,7 +63,7 @@ map.addSource('somerville', {
     });
 });
 
-var toggleableLayerIds = [ 'contours', 'somerville', 'boston1' ];
+var toggleableLayerIds = [ 'contours', 'somerville', 'boston' ];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
